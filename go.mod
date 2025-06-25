@@ -9,6 +9,8 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.8.2
 	github.com/sv-tools/openapi v0.2.1
+	github.com/swaggo/swag/v2 v2.0.0-rc4
+	golang.org/x/text v0.14.0
 	golang.org/x/tools v0.8.0
 	sigs.k8s.io/yaml v1.3.0
 )
@@ -19,7 +21,10 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
-	golang.org/x/text v0.14.0 // indirect
+)
+
+replace (
+	github.com/swaggo/swag/v2 v2.0.0-rc4 => github.com/arsensokolov/swag/v2 v2.0.0-rc5
 )
 
 require (
