@@ -589,6 +589,15 @@ func processRouterOperationV3(p *Parser, o *OperationV3) error {
 			p.debug.Printf("warning: %s\n", err)
 		}
 
+		// --- POST-PROCESSING: remove requestBody for GET/DELETE/HEAD/OPTIONS ---
+		if o.RequestBody != nil {
+			method := strings.ToUpper(routeProperties.HTTPMethod)
+			if method == "GET" || method == "DELETE" || method == "HEAD" || method == "OPTIONS" {
+				o.RequestBody = nil
+			}
+		}
+		// ----------------------------------------------------------------------
+
 		*op = &o.Operation
 
 		p.openAPI.Paths.Spec.Paths[routeProperties.Path] = pathItem

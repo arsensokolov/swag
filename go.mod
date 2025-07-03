@@ -23,9 +23,7 @@ require (
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
 )
 
-replace (
-	github.com/swaggo/swag/v2 v2.0.0-rc4 => github.com/arsensokolov/swag/v2 v2.0.0-rc5
-)
+replace github.com/swaggo/swag/v2 v2.0.0-rc4 => github.com/arsensokolov/swag/v2 v2.0.0-rc6
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
