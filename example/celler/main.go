@@ -2,12 +2,14 @@ package main
 
 import (
 	"errors"
+	"log"
 	"net/http"
 
+	"github.com/arsensokolov/swag/v2"
+	"github.com/arsensokolov/swag/v2/example/celler/controller"
+	_ "github.com/arsensokolov/swag/v2/example/celler/docs"
+	"github.com/arsensokolov/swag/v2/example/celler/httputil"
 	"github.com/gin-gonic/gin"
-	"github.com/swaggo/swag/v2/example/celler/controller"
-	_ "github.com/swaggo/swag/v2/example/celler/docs"
-	"github.com/swaggo/swag/v2/example/celler/httputil"
 
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -92,6 +94,17 @@ func main() {
 			examples.GET("attribute", c.AttributeExample)
 		}
 	}
+
+	r.GET("/swagger/doc.json", func(c *gin.Context) {
+		doc, err := swag.ReadDoc()
+		if err != nil || doc == "" {
+			log.Printf("Swagger doc generation error: %v", err)
+			c.String(500, "Internal Server Error: failed to generate swagger doc")
+			return
+		}
+		c.Data(200, "application/json", []byte(doc))
+	})
+
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.Run(":8080")
 }
